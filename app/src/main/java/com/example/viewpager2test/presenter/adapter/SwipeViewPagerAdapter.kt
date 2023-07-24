@@ -6,10 +6,10 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.viewpager2test.MainActivity
 import com.example.viewpager2test.presenter.StoryFragment
 
-class CatchViewPagerAdapter(fragment: Fragment) :
+class SwipeViewPagerAdapter(fragment: Fragment) :
     FragmentStateAdapter(fragment) {
 
-    private var colorList: ArrayList<String> = arrayListOf()
+    private var colorList: ArrayList<ArrayList<String>> = arrayListOf()
     lateinit var listener: MainActivity.ViewModelCountListener
 
     override fun getItemCount(): Int {
@@ -17,16 +17,17 @@ class CatchViewPagerAdapter(fragment: Fragment) :
     }
 
     override fun createFragment(position: Int): Fragment {
-        Log.d("CatchViewPagerAdapter", "createFragment() - listener: $listener")
+        Log.d("SwipeViewPagerAdapter", "createFragment() - position: $position")
         val data = colorList[position]
         return StoryFragment.newInstance(
+            position,
             data,
             listener
         )
     }
 
-    fun setData(data: ArrayList<String>, listener: MainActivity.ViewModelCountListener) {
-        Log.d("CatchViewPagerAdapter", "setData() - listener: $listener")
+    fun setData(data: ArrayList<ArrayList<String>>, listener: MainActivity.ViewModelCountListener) {
+        Log.d("SwipeViewPagerAdapter", "setData() - size: ${data.size}, listener: $listener")
         colorList = data
         this.listener = listener
         notifyDataSetChanged()

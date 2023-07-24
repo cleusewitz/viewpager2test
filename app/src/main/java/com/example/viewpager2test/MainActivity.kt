@@ -28,6 +28,10 @@ class MainActivity : FragmentActivity() {
                 Log.e("LEO", "onMinus() - count: $count")
                 binding.tvCount.text = (--count).toString()
             }
+
+            override fun setPageMove(right: Boolean) {
+
+            }
         })
         supportFragmentManager.beginTransaction()
             .replace(
@@ -41,5 +45,6 @@ class MainActivity : FragmentActivity() {
     interface ViewModelCountListener {
         fun onPlus()
         fun onMinus()
+        fun setPageMove(right: Boolean)
     }
 }

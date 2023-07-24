@@ -7,35 +7,58 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.viewpager2test.MainActivity
 import com.example.viewpager2test.R
 import com.example.viewpager2test.databinding.FragmentSwipeBinding
-import com.example.viewpager2test.presenter.adapter.CatchViewPagerAdapter
+import com.example.viewpager2test.presenter.adapter.SwipeViewPagerAdapter
+import java.util.ArrayList
 
 class SwipeFragment : BaseDataBindingFragment<FragmentSwipeBinding>(R.layout.fragment_swipe) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d("SwipeFragment", "onViewCreated()")
-        val sectionsPagerAdapter = CatchViewPagerAdapter(this)
+        Log.d("LEO", "SwipeFragment()::onViewCreated() - this:$this")
+        val sectionsPagerAdapter = SwipeViewPagerAdapter(this)
+        val viewPager: ViewPager2 = binding.viewPager2
+
+        // viewPager.offscreenPageLimit = 1
         sectionsPagerAdapter.setData(
-            arrayListOf(
-                "#ff0000",
-                "#ff00ff",
-                "#ffff00",
-                "#ee0000",
-                "#ee00ee",
-                "#eeee00",
-                "#dd0000",
-                "#dd00dd",
-                "#dddd00",
-            ),
+            arrayListOf<ArrayList<String>>().apply {
+                add(
+                    arrayListOf(
+                        "#ffff0000",
+                    )
+                )
+                add(
+                    arrayListOf(
+                        "#ddff0000",
+                    )
+                )
+                add(
+                    arrayListOf(
+                        "#ccff0000",
+                    )
+                )
+                add(
+                    arrayListOf(
+                        "#bbff0000",
+                    )
+                )
+                add(
+                    arrayListOf(
+                        "#aaff0000",
+                    )
+                )
+                add(
+                    arrayListOf(
+                        "#99ff0000",
+                    )
+                )
+            },
             listener
         )
-        val viewPager: ViewPager2 = binding.viewPager2
         viewPager.adapter = sectionsPagerAdapter
     }
 
     private lateinit var listener: MainActivity.ViewModelCountListener
     fun setEventListener(listener: MainActivity.ViewModelCountListener) {
-        Log.d("SwipeFragment", "setEventListener()")
         this.listener = listener
     }
 }
